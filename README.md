@@ -1,39 +1,48 @@
-# Dockerizing Django with Postgres, Gunicorn, and Nginx
 
-## Want to learn how to build this?
-
-Check out the [post](https://testdriven.io/dockerizing-django-with-postgres-gunicorn-and-nginx).
-
-## Want to use this project?
-
-### Development
-
-Uses the default Django development server.
-
-1. Rename *.env.dev-sample* to *.env.dev*.
-1. Update the environment variables in the *docker-compose.yml* and *.env.dev* files.
-1. Build the images and run the containers:
-
-    ```sh
-    $ docker-compose up -d --build
-    ```
-
-    Test it out at [http://localhost:8000](http://localhost:8000). The "app" folder is mounted into the container and your code changes apply automatically.
-
-### Production
-
-Uses gunicorn + nginx.
-
-1. Rename *.env.prod-sample* to *.env.prod* and *.env.prod.db-sample* to *.env.prod.db*. Update the environment variables.
-1. Build the images and run the containers:
-
-    ```sh
-    $ docker-compose -f docker-compose.prod.yml up -d --build
-    ```
-
-    Test it out at [http://localhost:1337](http://localhost:1337). No mounted folders. To apply changes, the image must be re-built.
+# MOWO Spaces Wagtail Website
 
 
-### CI and Production
+### Prerequisites (For Development)
 
-See the blog [post](https://testdriven.io/blog/deploying-django-to-digitalocean-with-docker-and-gitlab/).
+* Docker
+
+	* Windows: Docker Desktop 2.0+ on Windows 10 Pro/Enterprise. Windows 10 Home (2004+) requires Docker Desktop 2.2+ and the WSL2 back-end. (Docker Toolbox is not supported.)
+
+	* macOS: Docker Desktop 2.0+.
+
+	* Linux: Docker CE/EE 18.06+ and Docker Compose 1.21+. (The Ubuntu snap package is not supported.)
+
+* Visual Studio Code Extension: `Remote - Containers`
+
+### Development Setup
+
+Then run this application in the `DEV Container`!
+
+You also need to set your Auth0 Domain and the API's audience as environment variables with the following names respectively: `AUTH0_DOMAIN` and `API_IDENTIFIER`, which is the audience of your API. You can find an example in the
+
+`env.example` file.
+
+ 
+```bash
+
+# .env file
+
+API_IDENTIFIER=API_IDENTIFIER_NAME
+
+POSTGRES_DB_NAME=POSTGRES_DATABASE_NAME
+
+...
+
+```
+
+Once you've set the environment variables:
+
+  
+
+1. Install the needed dependencies with `pip install -r requirements.txt`
+
+2. Migrate the database with `python manage.py migrate`
+
+3. Start the server with `python manage.py runserver`
+
+4. Try calling [http://localhost:8000/](http://localhost:8000/)
